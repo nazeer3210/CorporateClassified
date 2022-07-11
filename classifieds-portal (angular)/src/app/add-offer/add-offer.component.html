@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="alert alert-danger" *ngIf="pageError!=''">{{pageError}}</div>
+    <div class="offer-details-content">
+        <h1>Post an Offer</h1><br>
+        <form [formGroup]="addOfferForm" (ngSubmit)="onSubmit()">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Properties</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>
+                            <input type="text" formControlName="name" style="display:none">
+                            <input type="text" formControlName="name" class="form-control">
+                            <!-- error checking for name -->
+                            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+
+                                <div *ngIf="name?.errors?.required">
+                                    name of the offer is required.
+                                </div>
+
+                                <div *ngIf="name?.errors?.minlength">
+                                    name must be at least 3 characters long.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Details</td>
+                        <td>
+                            <input type="textbox" rows="2" formControlName="details" class="form-control">
+                            <!-- error checking for details-->
+                            <div *ngIf="details?.invalid && (details?.dirty || details?.touched)" class="alert alert-danger">
+
+                                <div *ngIf="details?.errors?.required">
+                                    Details is required.
+                                </div>
+
+                                <div *ngIf="details?.errors?.minlength">
+                                    Details must be at least 10 characters long.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td>
+                            <select class="form-control" formControlName="category">
+                                <option>Electronics</option>
+                                <option>Books</option>
+				<option>Furniture</option>
+				<option>Pets</option>
+                                </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary" [disabled]="!addOfferForm.valid"> Submit</button> &nbsp; &nbsp;<a class="btn btn-dark" routerLink="/main">Go back</a>
+        </form>
+
+    </div>
+</div>
